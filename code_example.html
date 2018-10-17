@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>code example</title>
+<meta charset="utf-8"/>
+</head>
+
+<body>
+
+<code>A piece of computer code</code>
+
+<p> See <a href="https://tohtml.com/" target="_blank">tohtml.com</a> for code syntax highlighting...</p>
+<hr>
+
+<pre style='color:#000000;background:#ffffff;'><span style='color:#800000; font-weight:bold; '>import</span> os
+<span style='color:#800000; font-weight:bold; '>from</span> weakref <span style='color:#800000; font-weight:bold; '>import</span> WeakKeyDictionary
+<span style='color:#800000; font-weight:bold; '>from</span> <span style='color:#808030; '>.</span> <span style='color:#800000; font-weight:bold; '>import</span> errors
+
+
+<span style='color:#800000; font-weight:bold; '>class</span> YamlFilePath<span style='color:#808030; '>(</span><span style='color:#400000; '>object</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+    <span style='color:#696969; '>''' A descriptor defining a yaml file path. These must:</span>
+<span style='color:#696969; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-> be of the type str</span>
+<span style='color:#696969; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-> point to a file that exists</span>
+<span style='color:#696969; '>&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;-> end with the file extension '.yaml'</span>
+<span style='color:#696969; '>&#xa0;&#xa0;&#xa0;&#xa0;'''</span>
+    <span style='color:#800000; font-weight:bold; '>def</span> <span style='color:#074726; '>__init__</span><span style='color:#808030; '>(</span>self<span style='color:#808030; '>,</span> default<span style='color:#808030; '>=</span><span style='color:#074726; '>None</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        self<span style='color:#808030; '>.</span>default <span style='color:#808030; '>=</span> default
+        self<span style='color:#808030; '>.</span>data <span style='color:#808030; '>=</span> WeakKeyDictionary<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+
+    <span style='color:#800000; font-weight:bold; '>def</span> <span style='color:#074726; '>__get__</span><span style='color:#808030; '>(</span>self<span style='color:#808030; '>,</span> instance<span style='color:#808030; '>,</span> owner<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#800000; font-weight:bold; '>return</span> self<span style='color:#808030; '>.</span>data<span style='color:#808030; '>.</span>get<span style='color:#808030; '>(</span>instance<span style='color:#808030; '>,</span> self<span style='color:#808030; '>.</span>default<span style='color:#808030; '>)</span>
+
+    <span style='color:#800000; font-weight:bold; '>def</span> <span style='color:#074726; '>__set__</span><span style='color:#808030; '>(</span>self<span style='color:#808030; '>,</span> instance<span style='color:#808030; '>,</span> value<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+        <span style='color:#696969; '># the path must be a string</span>
+        <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#800000; font-weight:bold; '>not</span> <span style='color:#400000; '>isinstance</span><span style='color:#808030; '>(</span>value<span style='color:#808030; '>,</span> <span style='color:#400000; '>str</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>raise</span> errors<span style='color:#808030; '>.</span>YamlFilePathTypeError
+
+        <span style='color:#696969; '># end with '.yaml'</span>
+        <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#800000; font-weight:bold; '>not</span> value<span style='color:#808030; '>.</span>endswith<span style='color:#808030; '>(</span><span style='color:#0000e6; '>".yaml"</span><span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>raise</span> errors<span style='color:#808030; '>.</span>NotAYamlFileError
+
+        <span style='color:#696969; '># and point to an existing file</span>
+        <span style='color:#800000; font-weight:bold; '>if</span> <span style='color:#800000; font-weight:bold; '>not</span> os<span style='color:#808030; '>.</span>path<span style='color:#808030; '>.</span>isfile<span style='color:#808030; '>(</span>value<span style='color:#808030; '>)</span><span style='color:#808030; '>:</span>
+            <span style='color:#800000; font-weight:bold; '>raise</span> errors<span style='color:#808030; '>.</span>YamlFileMustExistError
+        self<span style='color:#808030; '>.</span>data<span style='color:#808030; '>[</span>instance<span style='color:#808030; '>]</span> <span style='color:#808030; '>=</span> value
+</pre>
+<!--Created using ToHtml.com on 2018-10-17 12:36:00 UTC -->
+<hr>
+
+</body>
+
+</html>
